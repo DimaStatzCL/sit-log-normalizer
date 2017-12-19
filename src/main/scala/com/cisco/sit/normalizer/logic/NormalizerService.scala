@@ -8,7 +8,7 @@ object NormalizerService {
 }
 
 trait NormalizerService {
-  def load(): Seq[Log]
+  def read(): Seq[Log]
   def transform(log: Log): Log
-  def upload(log: Log)
+  def write(log: Log)
 }
