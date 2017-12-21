@@ -19,6 +19,7 @@ object Boot extends LazyLogging {
     val reader = system.actorOf(Props(new ActorDataReader(null)))
     logger.info(s"reader created ${reader.hashCode()}")
 
+
     sys addShutdownHook {
       logger.info("normalizer is shutting down")
       system.terminate()
