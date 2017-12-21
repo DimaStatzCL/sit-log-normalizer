@@ -4,6 +4,7 @@ import com.cisco.sit.normalizer.logic.NormalizerService.Log
 
 
 object NormalizerService {
+  case object NormalizationRequest
   case class Log(name: String, data: Seq[String], transformType: Int)
 }
 
