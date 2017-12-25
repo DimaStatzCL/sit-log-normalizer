@@ -1,15 +1,16 @@
 package com.cisco.sit.normalizer.logic
 
-import com.cisco.sit.normalizer.logic.NormalizerService.Log
+import com.cisco.sit.normalizer.logic.NormalizerService._
 
 
 object NormalizerService {
-  case object NormalizationRequest
-  case class Log(name: String, data: Seq[String], transformType: Int)
+  type TransformHandler = String => String
+  case class LogData(logInfo: LogID, data: Seq[String])
+  case class LogID(tenant: String, device: String, timeStamp: Long)
 }
 
 trait NormalizerService {
-  def read(): Seq[Log]
-  def transform(log: Log): Log
-  def write(log: Log)
+  def read(): Seq[LogData]
+  def write(log: LogData)
+  def transform(log: LogData): LogData
 }

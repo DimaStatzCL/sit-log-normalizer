@@ -5,8 +5,14 @@ import akka.actor.Actor
 import org.slf4j.LoggerFactory
 import com.typesafe.scalalogging.Logger
 import com.cisco.sit.normalizer.logic._
-import com.cisco.sit.normalizer.logic.NormalizerService._
 import org.apache.commons.lang3.exception.ExceptionUtils
+import com.cisco.sit.normalizer.actors.ActorDataReader.NormalizationRequest
+import com.cisco.sit.normalizer.logic.NormalizerService.LogData
+
+
+object ActorDataReader{
+  case object NormalizationRequest
+}
 
 
 class ActorDataReader(service: NormalizerService) extends Actor {
@@ -25,10 +31,11 @@ class ActorDataReader(service: NormalizerService) extends Actor {
     }
   }
 
-  private def transform(log: Log) = {
+  private def transform(log: LogData) = {
     Try(normalizer.transform(log)) match {
-      case Success(x) => logger.info(s"${log.name} sent")
-      case Failure(x) => logger.error(s"failed to send ${log.name} ${ExceptionUtils.getStackTrace(x)}")
+      case Success(x) => logger.info(s"${log.logInfo.device} sent")
+      case Failure(x) => logger.error(s"failed to send ${log.logInfo.device} " +
+        s"${ExceptionUtils.getStackTrace(x)}")
     }
   }
 }

@@ -14,4 +14,4 @@ def f1() = {
 }
 
 
-f1()
+System.currentTimeMillis()
