@@ -6,13 +6,8 @@ import org.slf4j.LoggerFactory
 import com.typesafe.scalalogging.Logger
 import com.cisco.sit.normalizer.logic._
 import org.apache.commons.lang3.exception.ExceptionUtils
-import com.cisco.sit.normalizer.actors.ActorDataReader.NormalizationRequest
 import com.cisco.sit.normalizer.logic.NormalizerService.LogData
-
-
-object ActorDataReader{
-  case object NormalizationRequest
-}
+import com.cisco.sit.normalizer.actors.ActorSupervisor.NormalizationRequest
 
 
 class ActorDataReader(service: NormalizerService) extends Actor {
